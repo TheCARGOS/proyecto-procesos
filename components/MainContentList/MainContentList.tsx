@@ -1,4 +1,6 @@
 import { IProduct } from '../../helpers/index';
+import { useContext } from 'react';
+import AppContext from 'context/AppContext';
 
 interface IMainContentListProps {
   handleIsMainModalOpen: ( val: boolean ) => void,
@@ -8,9 +10,11 @@ interface IMainContentListProps {
 
 const MainContentList = ( mainContentListProps: IMainContentListProps ) => {
   const { handleIsMainModalOpen, listProducts, setSelectedProduct } = mainContentListProps
+  const { ui } = useContext(AppContext)
+  const { uiDispatch } = ui
 
   const handleOnDelete = (_product: IProduct) => {
-    handleIsMainModalOpen( true )
+    uiDispatch({ type: "OPEN_MODAL" })
     setSelectedProduct( _product )
   }
   
